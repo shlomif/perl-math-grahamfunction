@@ -9,6 +9,8 @@ my $builder = Module::Build->new(
     dist_version_from   => 'lib/Math/GrahamFunction.pm',
     build_requires => {
         'Test::More' => 0,
+        'Class::Accessor' => 0,
+        'List::Util' => 0,
     },
     add_to_cleanup      => [ 'Math::GrahamFunction-*' ],
 );
