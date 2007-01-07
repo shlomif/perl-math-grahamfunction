@@ -3,6 +3,12 @@ package Math::GrahamFunction::SqFacts;
 use strict;
 use warnings;
 
+=head1 NAME
+
+Math::GrahamFunction::SqFacts - a squaring factors vector.
+
+=cut
+
 use base qw(Math::GrahamFunction::Object);
 
 use List::Util ();
@@ -17,7 +23,7 @@ sub _initialize
     {
         $self->n($args->{n});
 
-        $self->calc_sq_factors();
+        $self->_calc_sq_factors();
     }
     elsif ($args->{factors})
     {
@@ -31,24 +37,42 @@ sub _initialize
     return 0;
 }
 
+=head1 CONSTRUCTION
+
+=head2 Math::GrahamFunction::SqFacts->new({n => $n})
+
+Initializes a squaring factors object from a number.
+
+=head2 Math::GrahamFunction::SqFacts->new({factors => \@factors})
+
+Initializes a squaring factors object from a list of factors.
+
+=head1 METHODS
+
+=head2 $facts->clone()
+
+Creates a clone of the object and returns it.
+
+=cut
+
 sub clone
 {
     my $self = shift;
     return __PACKAGE__->new({'factors' => [@{$self->factors()}]});
 }
 
-sub calc_sq_factors
+sub _calc_sq_factors
 {
     my $self = shift;
 
-    $self->factors($self->get_sq_facts($self->n()));
+    $self->factors($self->_get_sq_facts($self->n()));
 
     return 0;
 }
 
 my %gsf_cache = (1 => []);
 
-sub get_sq_facts
+sub _get_sq_facts
 {
     my $self = shift;
     my $n = shift;
@@ -66,7 +90,7 @@ sub get_sq_facts
         {
             # This function is recursive to make better use of the Memoization
             # feature.
-            my $division_factors = $self->get_sq_facts(($n / $p), $p);
+            my $division_factors = $self->_get_sq_facts(($n / $p), $p);
             if (@$division_factors && ($division_factors->[0] == $p))
             {
                 return ($gsf_cache{$n} = [ @{$division_factors}[1 .. $#$division_factors] ]);
@@ -88,6 +112,15 @@ sub get_sq_facts
 
 # OOP-Wise, it should be a multi-method, but since we don't inherit this
 # object it's all-right.
+
+=head2 $n_facts->mult_by($m_facts)
+
+Calculates the results of the multiplication of the number represented by
+C<$n_facts> and C<$m_facts> and stores it in $n_facts (destructively).
+
+This is actually addition in vector space.
+
+=cut
 
 sub mult_by
 {
@@ -130,6 +163,12 @@ sub mult_by
     return 0;
 }
 
+=head2 my $result = $n->mult($m);
+
+Non destructively calculates the multiplication and returns it.
+
+=cut
+
 sub mult
 {
     my $n = shift;
@@ -140,11 +179,23 @@ sub mult
     return $result;
 }
 
+=head2 $facts->is_square()
+
+A predicate that returns whether the factors represent a square number.
+
+=cut
+
 sub is_square
 {
     my $self = shift;
     return (scalar(@{$self->factors()}) == 0);
 }
+
+=head2 $facts->exists($myfactor)
+
+Checks whether C<$myfactor> exists in C<$facts>.
+
+=cut
 
 sub exists
 {
@@ -152,6 +203,12 @@ sub exists
     
     return defined(List::Util::first { $_ == $factor } @{$self->factors()});
 }
+
+=head2 my $last_factor = $factors->last()
+
+Returns the last (and greatest factor).
+
+=cut
 
 sub last
 {
@@ -162,12 +219,24 @@ sub last
 
 use vars qw($a $b);
 
+=head2 $facts->product()
+
+Returns the product of the factors.
+
+=cut
+
 sub product
 {
     my $self = shift;
 
     return (List::Util::reduce { $a * $b } @{$self->factors()});
 }
+
+=head2 $facts->first()
+
+Returns the first (and smallest) factor.
+
+=cut
 
 sub first
 {
@@ -176,7 +245,23 @@ sub first
     return $self->factors()->[0];    
 }
 
+=head1 AUTHOR
 
+Shlomi Fish, C<< <shlomif at cpan.org> >>
+
+=head1 ACKNOWLEDGEMENTS
+
+=head1 COPYRIGHT & LICENSE
+
+Copyright 2007 Shlomi Fish, all rights reserved.
+
+This program is released under the following license: MIT X11.
+
+B<Note:> the module meta-data says this module is released under the BSD
+license. However, MIT X11 is the more accurate license, and "bsd" is
+the closest option for the CPAN meta-data.
+
+=cut
 
 1;
 
