@@ -45,10 +45,6 @@ sub _initialize
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
     use Math::GrahamFunction;
 
     my $calc = Math::GrahamFunction->new({ 'n' => 500 });
@@ -478,7 +474,7 @@ Copyright 2007 Shlomi Fish, all rights reserved.
 
 This program is released under the following license: MIT X11.
 
-Note: the module meta-data says this module is released under the BSD
+B<Note:> the module meta-data says this module is released under the BSD
 license. However, MIT X11 is the more accurate license, and "bsd" is
 the closest option for the CPAN meta-data.
 
