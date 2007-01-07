@@ -7,6 +7,10 @@ use warnings;
 
 Math::GrahamFunction::SqFacts - a squaring factors vector.
 
+=head1 WARNING!
+
+This is a module for Math::GrahamFunction's internal use only.
+
 =cut
 
 use base qw(Math::GrahamFunction::Object);

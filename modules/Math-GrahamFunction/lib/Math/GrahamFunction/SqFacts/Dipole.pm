@@ -8,6 +8,10 @@ use warnings;
 Math::GrahamFunction::SqFacts::Dipole - a dipole of two vectors - a result and
 a composition.
 
+=head1 WARNING!
+
+This is a module for Math::GrahamFunction's internal use only.
+
 =cut
 
 use base qw(Math::GrahamFunction::SqFacts);
@@ -26,6 +30,15 @@ sub _initialize
     return 0;
 }
 
+=head1 METHODS
+
+=head2 my $copy = $dipole->clone()
+
+Clones the dipole returning a new dipole with the clone of the result and the
+composition.
+
+=cut
+
 sub clone
 {
     my $self = shift;
@@ -35,6 +48,12 @@ sub clone
             'compose' => $self->compose()->clone(),
         });
 }
+
+=head2 $changing_dipole->mult_by($constant_dipole)
+
+Multiplies the result by the result and the composition by the composition.
+
+=cut
 
 sub mult_by
 {
@@ -47,11 +66,23 @@ sub mult_by
     return 0;
 }
 
+=head2 $bool = $dipole->is_square()
+
+Returns whether the result is square.
+
+=cut
+
 sub is_square
 {
     my $self = shift;
     return $self->result()->is_square();
 }
+
+=head2 $bool = $dipole->exists($factor)
+
+Returns whether the factor exists in the result.
+
+=cut
 
 sub exists
 {
@@ -60,12 +91,24 @@ sub exists
     return $self->result()->exists($factor);
 }
 
+=head2 $first_factor = $dipole->first()
+
+Returns the C<first()> factor of the result vector.
+
+=cut
+
 sub first
 {
     my $self = shift;
 
     return $self->result()->first();
 }
+
+=head2 $factors = $dipole->factors()
+
+Equivalent to C<$dipole->result()->factors()>.
+
+=cut
 
 sub factors
 {
