@@ -466,6 +466,12 @@ L<http://search.cpan.org/dist/Math::GrahamFunction>
 
 =back
 
+=head1 SOURCE AVAILABILITY
+
+The latest source for this module is available from its subversion repository:
+
+L<http://svn.berlios.de/svnroot/repos/web-cpan/Math-GrahamFunction/trunk>
+
 =head1 ACKNOWLEDGEMENTS
 
 =head1 COPYRIGHT & LICENSE
