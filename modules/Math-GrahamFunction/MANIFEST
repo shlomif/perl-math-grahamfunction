@@ -1,5 +1,6 @@
 Build.PL
 Changes
+examples/calc-graham.pl
 lib/Math/GrahamFunction/Object.pm
 lib/Math/GrahamFunction.pm
 lib/Math/GrahamFunction/SqFacts/Dipole.pm
