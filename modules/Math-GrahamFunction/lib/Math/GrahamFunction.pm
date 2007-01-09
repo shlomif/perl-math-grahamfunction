@@ -55,13 +55,32 @@ sub _initialize
         $results->{'factors'}->[-1],
         "\n";
 
-=cut
+=head1 DESCRIPTION
+
+The Graham Function of a natural number B<n>, which we will denote by B<G(n)>,
+is the minimal number for which there's an increasing series of integers 
+that starts at B<n> and ends at B<G(n)> whose product is a perfect square.
+
+This module calculates the Graham Function of a natural number, along with
+the entire associated series.
+
+=head2 BACKGROUND
+
+On 11 December 2002, Mark Jason Dominus gave a Perl Quiz-of-the-week
+challenge to write a Perl program to calculate the Graham Function. I came
+up with a solution for it, whose complexity was polynomial (as opposed to
+brute force solutions, which are exponential complexity.). This module is
+derived from my original code, after it was heavily refactored.
+
+More information about the algorithm and the original code can be found here:
+
+L<http://www.shlomifish.org/lecture/Perl/Graham-Function/>
 
 =head1 FUNCTIONS
 
 =head2 my $calc = Math::GrahamFunction->new({'n' => $n});
 
-Initialises a new object for solving the Graham's Function of the 
+Initializes a new object for solving the Graham's Function of the 
 number C<$n>. Call solve() next.
 
 =head2 my $results = $calc->solve();
