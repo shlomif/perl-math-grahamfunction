@@ -1,6 +1,7 @@
 Revision history for Math::GrahamFunction
 
-0.01001
+0.01001    Mon Feb  5 20:17:22 IST 2007
+
     - Moved List::Util and Class::Accessor to "requires" instead of
     "build_requires" inside the Build.PL in accordance to the rule that
     modules that are required to run the module after building should be
@@ -9,5 +10,6 @@ Revision history for Math::GrahamFunction
     - Added MJD, imacat and David Golden to the Acknowledgements' section.
 
 0.01       Tue Jan  9 14:55:14 IST 2007
+
     - First version, released on an unsuspecting world.
 
