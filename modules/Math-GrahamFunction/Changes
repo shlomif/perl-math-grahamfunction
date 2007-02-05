@@ -6,6 +6,7 @@ Revision history for Math::GrahamFunction
     modules that are required to run the module after building should be
     in "requires".
     - Added a note about the optimization's side-effects in the known bugs.
+    - Added MJD, imacat and David Golden to the Acknowledgements' section.
 
 0.01       Tue Jan  9 14:55:14 IST 2007
     - First version, released on an unsuspecting world.

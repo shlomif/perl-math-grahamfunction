@@ -500,6 +500,13 @@ L<http://svn.berlios.de/svnroot/repos/web-cpan/Math-GrahamFunction/trunk>
 
 =head1 ACKNOWLEDGEMENTS
 
+Mark Jason Dominus ( L<http://perl.plover.com/> ) for the original Graham
+Function Quiz-of-the-Week.
+
+imacat (L<http://www.imacat.idv.tw/>) and David Golden for helping me
+debug a CPAN smoking failure with installing this module on imacat's
+computer.
+
 =head1 COPYRIGHT & LICENSE
 
 Copyright 2007 Shlomi Fish, all rights reserved.
