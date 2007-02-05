@@ -5,6 +5,7 @@ Revision history for Math::GrahamFunction
     "build_requires" inside the Build.PL in accordance to the rule that
     modules that are required to run the module after building should be
     in "requires".
+    - Added a note about the optimization's side-effects in the known bugs.
 
 0.01       Tue Jan  9 14:55:14 IST 2007
     - First version, released on an unsuspecting world.

@@ -449,6 +449,13 @@ sub _main_solve
 
 Shlomi Fish, C<< <shlomif at cpan.org> >>
 
+=head1 KNOWN BUGS
+
+The module may yield different sequences with its "factor in between"
+optimization than without it. The last number (= the Graham function)
+is the same, but the numbers in between are different. A future release
+will provide a flag to disable that optimization.
+
 =head1 BUGS
 
 Please report any bugs or feature requests to
