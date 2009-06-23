@@ -3,6 +3,7 @@ Revision history for Math::GrahamFunction
 0.02000
     - Converted the license in Build.PL to 'mit'.
     - Test::Run-enabled the distribution.
+    - Added keywords and the repository location to the META.yml.
 
 0.01001    Mon Feb  5 20:17:22 IST 2007
 

@@ -18,6 +18,34 @@ my $builder = Test::Run::Builder->new(
         'List::Util' => 0,
     },
     add_to_cleanup      => [ 'Math::GrahamFunction-*' ],
+    meta_merge =>
+    {
+        resources =>
+        {
+            repository => "http://svn.berlios.de/svnroot/repos/web-cpan/Math-GrahamFunction/trunk/modules/Math-GrahamFunction",
+        },
+        keywords =>
+        [
+            "factors",
+            "fun",
+            "function",
+            "graham",
+            "math",
+            "mathematics",
+            "maths",
+            "mjd",
+            "obscure",
+            "pure-perl",
+            "riddle",
+            "riddles",
+            "quizzes",
+            "qotw",
+            "quiz",
+            "quiz-of-the-week",
+            "square",
+            "week",
+        ],
+    },
 );
 
 $builder->create_build_script();
