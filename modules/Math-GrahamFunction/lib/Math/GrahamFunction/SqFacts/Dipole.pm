@@ -18,7 +18,7 @@ use base qw(Math::GrahamFunction::SqFacts);
 
 use List::Util ();
 __PACKAGE__->mk_accessors(qw(result compose));
-             
+
 sub _initialize
 {
     my $self = shift;

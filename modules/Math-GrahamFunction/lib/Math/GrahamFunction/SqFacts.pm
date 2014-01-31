@@ -17,7 +17,7 @@ use base qw(Math::GrahamFunction::Object);
 
 use List::Util ();
 __PACKAGE__->mk_accessors(qw(n factors));
-             
+
 sub _initialize
 {
     my $self = shift;
@@ -132,7 +132,7 @@ sub mult_by
     my $m_ref = shift;
 
     my @n = @{$n_ref->factors()};
-    my @m = 
+    my @m =
     eval {
         @{$m_ref->factors()};
     };
@@ -177,7 +177,7 @@ sub mult
 {
     my $n = shift;
     my $m = shift;
-    
+
     my $result = $n->clone();
     $result->mult_by($m);
     return $result;
@@ -204,7 +204,7 @@ Checks whether C<$myfactor> exists in C<$facts>.
 sub exists
 {
     my ($self, $factor) = @_;
-    
+
     return defined(List::Util::first { $_ == $factor } @{$self->factors()});
 }
 
@@ -246,7 +246,7 @@ sub first
 {
     my $self = shift;
 
-    return $self->factors()->[0];    
+    return $self->factors()->[0];
 }
 
 =head1 AUTHOR

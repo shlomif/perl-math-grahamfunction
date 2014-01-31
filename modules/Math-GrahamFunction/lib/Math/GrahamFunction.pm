@@ -53,14 +53,14 @@ sub _initialize
 
     my $results = $calc->solve();
 
-    print "The Graham Function of 500 is ", 
+    print "The Graham Function of 500 is ",
         $results->{'factors'}->[-1],
         "\n";
 
 =head1 DESCRIPTION
 
 The Graham Function of a natural number B<n>, which we will denote by B<G(n)>,
-is the minimal number for which there's an increasing series of integers 
+is the minimal number for which there's an increasing series of integers
 that starts at B<n> and ends at B<G(n)> whose product is a perfect square.
 
 This module calculates the Graham Function of a natural number, along with
@@ -82,7 +82,7 @@ L<http://www.shlomifish.org/lecture/Perl/Graham-Function/>
 
 =head2 my $calc = Math::GrahamFunction->new({'n' => $n});
 
-Initializes a new object for solving the Graham's Function of the 
+Initializes a new object for solving the Graham's Function of the
 number C<$n>. Call solve() next.
 
 =head2 my $results = $calc->solve();
@@ -90,8 +90,8 @@ number C<$n>. Call solve() next.
 Calculates the Graham's Function series for the number (could be
 time consuming), and returns a hash ref of results. The only field
 of interest there is C<'factors'>, which points to an array reference
-of the series. The series is increasing so 
-C<$results->{factors}->[0]> is C<$n> and 
+of the series. The series is increasing so
+C<$results->{factors}->[0]> is C<$n> and
 C<$results->{factors}->[-1]} is the Graham's Function.
 
 =head2 $self->_get_num_facts($number)
@@ -129,7 +129,7 @@ sub _get_num_dipole
             'compose' => $self->_get_facts($number),
         }
     );
- 
+
 }
 
 sub _calc_n_sq_factors
@@ -146,7 +146,7 @@ sub _check_largest_factor_in_between
     my $self = shift;
 
     my $n = $self->n();
-    # Cheating: 
+    # Cheating:
     # Check if between n and n+largest_factor we can fit
     # a square of SqFact{n*(n+largest_factor)}. If so, return
     # n+largest_factor.
@@ -159,7 +159,7 @@ sub _check_largest_factor_in_between
     my $largest_factor = $self->_n_sq_factors()->last();
 
     my ($lower_bound, $lb_sq_factors);
-    
+
     $lower_bound = $self->n() + $largest_factor;
     while (1)
     {
@@ -177,7 +177,7 @@ sub _check_largest_factor_in_between
 
     my $low_square_val = int(sqrt($n/$rest_of_factors_product));
     my $high_square_val = int(sqrt($lower_bound/$rest_of_factors_product));
-    
+
     if ($low_square_val != $high_square_val)
     {
         my @factors =
@@ -301,7 +301,7 @@ sub _main_init
         $self->_register_prime($p);
     }
 
-    # $self->_n_vec is used to determine if $n can be composed out of the 
+    # $self->_n_vec is used to determine if $n can be composed out of the
     # base's vectors.
     $self->_n_vec($self->_n_sq_factors->clone());
 
@@ -312,7 +312,7 @@ sub _main_init
 
 # A method to print the base. It is not used but can prove useful for
 # debugging.
-sub _print_base 
+sub _print_base
 {
     my $self = shift;
     print "Base=\n\n";
