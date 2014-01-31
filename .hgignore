@@ -5,3 +5,4 @@ modules/Math-GrahamFunction/MYMETA.json
 modules/Math-GrahamFunction/MYMETA.yml
 modules/Math-GrahamFunction/Math-GrahamFunction-*
 modules/Math-GrahamFunction/_build
+modules/Math-GrahamFunction/blib
