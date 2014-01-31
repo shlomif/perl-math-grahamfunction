@@ -16,7 +16,7 @@ Version 0.02000
 
 =cut
 
-our $VERSION = '0.02000';
+our $VERSION = '0.02001';
 
 use base qw(Math::GrahamFunction::Object);
 
