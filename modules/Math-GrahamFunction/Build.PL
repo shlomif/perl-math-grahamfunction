@@ -17,6 +17,7 @@ my $builder = Test::Run::Builder->new(
     requires => {
         'Class::Accessor' => 0,
         'List::Util' => 0,
+        'perl' => '5.008',
     },
     add_to_cleanup      => [ 'Math::GrahamFunction-*' ],
     meta_merge =>

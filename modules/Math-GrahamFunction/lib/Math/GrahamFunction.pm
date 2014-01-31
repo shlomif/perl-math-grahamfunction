@@ -3,9 +3,11 @@ package Math::GrahamFunction;
 use warnings;
 use strict;
 
+use 5.008;
+
 =head1 NAME
 
-Math::GrahamFunction - Calculate the Graham's Function of a Natural 
+Math::GrahamFunction - Calculate the Graham's Function of a Natural
 Number.
 
 =head1 VERSION
