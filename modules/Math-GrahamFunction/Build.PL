@@ -22,7 +22,7 @@ my $builder = Test::Run::Builder->new(
     {
         resources =>
         {
-            repository => "http://svn.berlios.de/svnroot/repos/web-cpan/Math-GrahamFunction/trunk/modules/Math-GrahamFunction",
+            repository => "https://bitbucket.org/shlomif/perl-math-grahamfunction/",
         },
         keywords =>
         [
