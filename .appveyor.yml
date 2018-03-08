@@ -1,7 +1,7 @@
 image: ubuntu
 
 install:
-- sudo apt-get -y install libmodule-build-perl
+- sudo apt-get -y install libclass-accessor-perl libmodule-build-perl
 
 test_script:
 - cd modules/Math-GrahamFunction/
