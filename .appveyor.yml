@@ -1,9 +1,14 @@
 image: ubuntu
 
 install:
-- npm install
+- cd modules/Math-GrahamFunction/
+- perl Build.PL
+- ./Build installdeps
 
 test_script:
-- npm test
-
+- cd modules/Math-GrahamFunction/
+- perl Build.PL
+- ./Build
+- ./Build test
+- ./Build disttest
 build: off
