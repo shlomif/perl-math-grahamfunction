@@ -10,13 +10,7 @@ use 5.008;
 Math::GrahamFunction - Calculate the Graham's Function of a Natural
 Number.
 
-=head1 VERSION
-
-Version 0.02000
-
 =cut
-
-our $VERSION = '0.02001';
 
 use parent qw(Math::GrahamFunction::Object);
 
