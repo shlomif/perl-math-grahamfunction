@@ -18,7 +18,7 @@ Version 0.02000
 
 our $VERSION = '0.02001';
 
-use base qw(Math::GrahamFunction::Object);
+use parent qw(Math::GrahamFunction::Object);
 
 use Math::GrahamFunction::SqFacts;
 use Math::GrahamFunction::SqFacts::Dipole;

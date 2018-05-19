@@ -10,7 +10,7 @@ objects.
 
 =cut
 
-use base qw(Class::Accessor);
+use parent qw(Class::Accessor);
 
 =head1 FUNCTIONS
 

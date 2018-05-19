@@ -13,7 +13,7 @@ This is a module for Math::GrahamFunction's internal use only.
 
 =cut
 
-use base qw(Math::GrahamFunction::Object);
+use parent qw(Math::GrahamFunction::Object);
 
 use List::Util ();
 __PACKAGE__->mk_accessors(qw(n factors));
