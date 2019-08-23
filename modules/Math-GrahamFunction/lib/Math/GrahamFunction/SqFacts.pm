@@ -88,7 +88,7 @@ sub _get_sq_facts
 
     my $start_from = shift || 2;
 
-    for(my $p=$start_from; ;$p++)
+    for(my $p=$start_from; ;++$p)
     {
         if ($n % $p == 0)
         {

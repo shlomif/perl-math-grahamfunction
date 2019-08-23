@@ -17,24 +17,26 @@ use parent qw(Math::GrahamFunction::Object);
 use Math::GrahamFunction::SqFacts;
 use Math::GrahamFunction::SqFacts::Dipole;
 
-__PACKAGE__->mk_accessors(qw(
-    _base
-    n
-    _n_vec
-    next_id
-    _n_sq_factors
-    primes_to_ids_map
-    ));
+__PACKAGE__->mk_accessors(
+    qw(
+        _base
+        n
+        _n_vec
+        next_id
+        _n_sq_factors
+        primes_to_ids_map
+        )
+);
 
 sub _initialize
 {
     my $self = shift;
     my $args = shift;
 
-    $self->n($args->{n}) or
-        die "n was not specified";
+    $self->n( $args->{n} )
+        or die "n was not specified";
 
-    $self->primes_to_ids_map({});
+    $self->primes_to_ids_map( {} );
 
     return 0;
 }
@@ -96,30 +98,26 @@ Get the Square factors of the number $number.
 
 sub _get_num_facts
 {
-    my ($self, $number) = @_;
+    my ( $self, $number ) = @_;
 
-    return Math::GrahamFunction::SqFacts->new({ 'n' => $number });
+    return Math::GrahamFunction::SqFacts->new( { 'n' => $number } );
 }
 
 sub _get_facts
 {
-    my ($self, $factors) = @_;
+    my ( $self, $factors ) = @_;
 
-    return
-        Math::GrahamFunction::SqFacts->new(
-            { 'factors' =>
-                (ref($factors) eq "ARRAY" ? $factors : [$factors])
-            }
-        );
+    return Math::GrahamFunction::SqFacts->new(
+        { 'factors' => ( ref($factors) eq "ARRAY" ? $factors : [$factors] ) } );
 }
 
 sub _get_num_dipole
 {
-    my ($self, $number) = @_;
+    my ( $self, $number ) = @_;
 
     return Math::GrahamFunction::SqFacts::Dipole->new(
         {
-            'result' => $self->_get_num_facts($number),
+            'result'  => $self->_get_num_facts($number),
             'compose' => $self->_get_facts($number),
         }
     );
@@ -130,9 +128,7 @@ sub _calc_n_sq_factors
 {
     my $self = shift;
 
-    $self->_n_sq_factors(
-        $self->_get_num_dipole($self->n)
-    );
+    $self->_n_sq_factors( $self->_get_num_dipole( $self->n ) );
 }
 
 sub _check_largest_factor_in_between
@@ -140,6 +136,7 @@ sub _check_largest_factor_in_between
     my $self = shift;
 
     my $n = $self->n();
+
     # Cheating:
     # Check if between n and n+largest_factor we can fit
     # a square of SqFact{n*(n+largest_factor)}. If so, return
@@ -152,13 +149,13 @@ sub _check_largest_factor_in_between
 
     my $largest_factor = $self->_n_sq_factors()->last();
 
-    my ($lower_bound, $lb_sq_factors);
+    my ( $lower_bound, $lb_sq_factors );
 
     $lower_bound = $self->n() + $largest_factor;
     while (1)
     {
         $lb_sq_factors = $self->_get_num_facts($lower_bound);
-        if ($lb_sq_factors->exists($largest_factor))
+        if ( $lb_sq_factors->exists($largest_factor) )
         {
             last;
         }
@@ -169,17 +166,20 @@ sub _check_largest_factor_in_between
 
     my $rest_of_factors_product = $n_times_lb->product();
 
-    my $low_square_val = int(sqrt($n/$rest_of_factors_product));
-    my $high_square_val = int(sqrt($lower_bound/$rest_of_factors_product));
+    my $low_square_val = int( sqrt( $n / $rest_of_factors_product ) );
+    my $high_square_val =
+        int( sqrt( $lower_bound / $rest_of_factors_product ) );
 
-    if ($low_square_val != $high_square_val)
+    if ( $low_square_val != $high_square_val )
     {
-        my @factors =
-        (
+        my @factors = (
             $n,
-            ($low_square_val+1)*($low_square_val+1)*$rest_of_factors_product,
+            ( $low_square_val + 1 ) *
+                ( $low_square_val + 1 ) *
+                $rest_of_factors_product,
             $lower_bound
         );
+
         # TODO - possibly convert to Dipole
         # return ($lower_bound, $self->_get_facts(\@factors));
         return \@factors;
@@ -193,61 +193,61 @@ sub _check_largest_factor_in_between
 sub _get_next_id
 {
     my $self = shift;
-    return $self->next_id($self->next_id()+1);
+    return $self->next_id( $self->next_id() + 1 );
 }
 
 sub _get_prime_id
 {
     my $self = shift;
-    my $p = shift;
+    my $p    = shift;
     return $self->primes_to_ids_map()->{$p};
 }
 
 sub _register_prime
 {
-    my ($self, $p) = @_;
+    my ( $self, $p ) = @_;
     $self->primes_to_ids_map()->{$p} = $self->_get_next_id();
 }
 
 sub _prime_exists
 {
-    my ($self, $p) = @_;
-    return exists($self->primes_to_ids_map->{$p});
+    my ( $self, $p ) = @_;
+    return exists( $self->primes_to_ids_map->{$p} );
 }
 
 sub _get_min_id
 {
-    my ($self, $vec) = @_;
+    my ( $self, $vec ) = @_;
 
     my $min_id = -1;
-    my $min_p = 0;
+    my $min_p  = 0;
 
-    foreach my $p (@{$vec->result()->factors()})
+    foreach my $p ( @{ $vec->result()->factors() } )
     {
         my $id = $self->_get_prime_id($p);
-        if (($min_id < 0) || ($min_id > $id))
+        if ( ( $min_id < 0 ) || ( $min_id > $id ) )
         {
             $min_id = $id;
-            $min_p = $p;
+            $min_p  = $p;
         }
     }
 
-    return ($min_id, $min_p);
+    return ( $min_id, $min_p );
 }
 
 sub _try_to_form_n
 {
     my $self = shift;
 
-    while (! $self->_n_vec->is_square())
+    while ( !$self->_n_vec->is_square() )
     {
         # Calculating $id as the minimal ID of the squaring factors of $p
-        my ($id, undef) = $self->_get_min_id($self->_n_vec);
+        my ( $id, undef ) = $self->_get_min_id( $self->_n_vec );
 
         # Multiply by the controlling vector of this ID if it exists
         # or terminate if it doesn't.
-        return 0 if (!defined($self->_base->[$id]));
-        $self->_n_vec->mult_by($self->_base->[$id]);
+        return 0 if ( !defined( $self->_base->[$id] ) );
+        $self->_n_vec->mult_by( $self->_base->[$id] );
     }
 
     return 1;
@@ -260,11 +260,11 @@ sub _get_final_factors
     $self->_calc_n_sq_factors();
 
     # The graham number of a perfect square is itself.
-    if ($self->_n_sq_factors->is_square())
+    if ( $self->_n_sq_factors->is_square() )
     {
         return $self->_n_sq_factors->_get_ret();
     }
-    elsif (defined(my $ret = $self->_check_largest_factor_in_between()))
+    elsif ( defined( my $ret = $self->_check_largest_factor_in_between() ) )
     {
         return $ret;
     }
@@ -287,17 +287,17 @@ sub _main_init
 
     $self->next_id(0);
 
-    $self->_base([]);
+    $self->_base( [] );
 
     # Register all the primes in the squaring factors of $n
-    foreach my $p (@{$self->_n_sq_factors->factors()})
+    foreach my $p ( @{ $self->_n_sq_factors->factors() } )
     {
         $self->_register_prime($p);
     }
 
     # $self->_n_vec is used to determine if $n can be composed out of the
     # base's vectors.
-    $self->_n_vec($self->_n_sq_factors->clone());
+    $self->_n_vec( $self->_n_sq_factors->clone() );
 
     return;
 }
@@ -310,7 +310,7 @@ sub _print_base
 {
     my $self = shift;
     print "Base=\n\n";
-    for(my $j = 0 ; $j < scalar( @{$self->_base()} ) ; $j++)
+    for my $j (keys @{$self->_base})
     {
         next if (! defined($self->_base->[$j]));
         print "base[$j] (" . join(" * ", @{$self->_base->[$j]}) . ")\n";
@@ -324,26 +324,27 @@ sub _print_base
 
 sub _update_base
 {
-    my ($self, $final_vec) = @_;
+    my ( $self, $final_vec ) = @_;
 
     # Get the minimal ID and its corresponding prime number
     # in $final_vec.
-    my ($min_id, $min_p) = $self->_get_min_id($final_vec);
+    my ( $min_id, $min_p ) = $self->_get_min_id($final_vec);
 
-    if ($min_id >= 0)
+    if ( $min_id >= 0 )
     {
         # Assign $final_vec as the controlling vector for this prime
         # number
         $self->_base->[$min_id] = $final_vec;
+
         # Canonicalize the rest of the vectors with the new vector.
-        CANON_LOOP:
-        for(my $j=0;$j<scalar(@{$self->_base()});$j++)
+    CANON_LOOP:
+        for my $j ( keys @{ $self->_base } )
         {
-            if (($j == $min_id) || (! defined($self->_base->[$j])))
+            if ( ( $j == $min_id ) || ( !defined( $self->_base->[$j] ) ) )
             {
                 next CANON_LOOP;
             }
-            if ($self->_base->[$j]->exists($min_p))
+            if ( $self->_base->[$j]->exists($min_p) )
             {
                 $self->_base->[$j]->mult_by($final_vec);
             }
@@ -353,25 +354,25 @@ sub _update_base
 
 sub _get_final_composition
 {
-    my ($self, $i_vec) = @_;
+    my ( $self, $i_vec ) = @_;
 
     # $final_vec is the new vector to add after it was
     # stair-shaped by all the controlling vectors in the base.
 
     my $final_vec = $i_vec;
 
-    foreach my $p (@{$i_vec->factors()})
+    foreach my $p ( @{ $i_vec->factors() } )
     {
-        if (!$self->_prime_exists($p))
+        if ( !$self->_prime_exists($p) )
         {
             $self->_register_prime($p);
         }
         else
         {
             my $id = $self->_get_prime_id($p);
-            if (defined($self->_base->[$id]))
+            if ( defined( $self->_base->[$id] ) )
             {
-                $final_vec->mult_by($self->_base->[$id]);
+                $final_vec->mult_by( $self->_base->[$id] );
             }
         }
     }
@@ -381,11 +382,12 @@ sub _get_final_composition
 
 sub _get_i_vec
 {
-    my ($self, $i) = @_;
+    my ( $self, $i ) = @_;
 
     my $i_vec = $self->_get_num_dipole($i);
+
     # Skip perfect squares - they do not add to the solution
-    if ($i_vec->is_square())
+    if ( $i_vec->is_square() )
     {
         return;
     }
@@ -396,7 +398,7 @@ sub _get_i_vec
     # Prime numbers cannot be included because 2*n is an upper bound
     # to G(n) and so if there is a prime p > n than its next multiple
     # will be greater than G(n).
-    if (($self->n() > 2) && ($i_vec->first() == $i))
+    if ( ( $self->n() > 2 ) && ( $i_vec->first() == $i ) )
     {
         return;
     }
@@ -406,7 +408,7 @@ sub _get_i_vec
 
 sub _solve_iteration
 {
-    my ($self, $i) = @_;
+    my ( $self, $i ) = @_;
 
     my $i_vec = $self->_get_i_vec($i)
         or return;
@@ -416,7 +418,7 @@ sub _solve_iteration
     $self->_update_base($final_vec);
 
     # Check if we can form $n
-    if ($self->_try_to_form_n())
+    if ( $self->_try_to_form_n() )
     {
         return $self->_n_vec->_get_ret();
     }
@@ -432,9 +434,9 @@ sub _main_solve
 
     $self->_main_init();
 
-    for(my $i=$self->n()+1;;$i++)
+    for ( my $i = $self->n() + 1 ; ; ++$i )
     {
-        if (defined(my $ret = $self->_solve_iteration($i)))
+        if ( defined( my $ret = $self->_solve_iteration($i) ) )
         {
             return $ret;
         }
@@ -515,4 +517,4 @@ the closest option for the CPAN meta-data.
 
 =cut
 
-1; # End of Math::GrahamFunction
+1;    # End of Math::GrahamFunction
