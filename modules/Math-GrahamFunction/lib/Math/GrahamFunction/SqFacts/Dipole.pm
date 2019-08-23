@@ -24,8 +24,8 @@ sub _initialize
     my $self = shift;
     my $args = shift;
 
-    $self->result($args->{result});
-    $self->compose($args->{compose});
+    $self->result( $args->{result} );
+    $self->compose( $args->{compose} );
 
     return 0;
 }
@@ -44,9 +44,10 @@ sub clone
     my $self = shift;
     return __PACKAGE__->new(
         {
-            'result' => $self->result()->clone(),
+            'result'  => $self->result()->clone(),
             'compose' => $self->compose()->clone(),
-        });
+        }
+    );
 }
 
 =head2 $changing_dipole->mult_by($constant_dipole)
@@ -60,8 +61,8 @@ sub mult_by
     my $n_ref = shift;
     my $m_ref = shift;
 
-    $n_ref->result()->mult_by($m_ref->result());
-    $n_ref->compose()->mult_by($m_ref->compose());
+    $n_ref->result()->mult_by( $m_ref->result() );
+    $n_ref->compose()->mult_by( $m_ref->compose() );
 
     return 0;
 }
@@ -86,7 +87,7 @@ Returns whether the factor exists in the result.
 
 sub exists
 {
-    my ($self, $factor) = @_;
+    my ( $self, $factor ) = @_;
 
     return $self->result()->exists($factor);
 }
@@ -121,7 +122,7 @@ sub _get_ret
 {
     my $self = shift;
 
-    return [ @{$self->compose->factors()} ];
+    return [ @{ $self->compose->factors() } ];
 }
 
 1;

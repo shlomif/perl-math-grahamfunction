@@ -23,15 +23,15 @@ sub _initialize
     my $self = shift;
     my $args = shift;
 
-    if ($args->{n})
+    if ( $args->{n} )
     {
-        $self->n($args->{n});
+        $self->n( $args->{n} );
 
         $self->_calc_sq_factors();
     }
-    elsif ($args->{factors})
+    elsif ( $args->{factors} )
     {
-        $self->factors($args->{factors});
+        $self->factors( $args->{factors} );
     }
     else
     {
@@ -62,46 +62,47 @@ Creates a clone of the object and returns it.
 sub clone
 {
     my $self = shift;
-    return __PACKAGE__->new({'factors' => [@{$self->factors()}]});
+    return __PACKAGE__->new( { 'factors' => [ @{ $self->factors() } ] } );
 }
 
 sub _calc_sq_factors
 {
     my $self = shift;
 
-    $self->factors($self->_get_sq_facts($self->n()));
+    $self->factors( $self->_get_sq_facts( $self->n() ) );
 
     return 0;
 }
 
-my %gsf_cache = (1 => []);
+my %gsf_cache = ( 1 => [] );
 
 sub _get_sq_facts
 {
     my $self = shift;
-    my $n = shift;
+    my $n    = shift;
 
-    if (exists($gsf_cache{$n}))
+    if ( exists( $gsf_cache{$n} ) )
     {
         return $gsf_cache{$n};
     }
 
     my $start_from = shift || 2;
 
-    for(my $p=$start_from; ;++$p)
+    for ( my $p = $start_from ; ; ++$p )
     {
-        if ($n % $p == 0)
+        if ( $n % $p == 0 )
         {
             # This function is recursive to make better use of the Memoization
             # feature.
-            my $division_factors = $self->_get_sq_facts(($n / $p), $p);
-            if (@$division_factors && ($division_factors->[0] == $p))
+            my $division_factors = $self->_get_sq_facts( ( $n / $p ), $p );
+            if ( @$division_factors && ( $division_factors->[0] == $p ) )
             {
-                return ($gsf_cache{$n} = [ @{$division_factors}[1 .. $#$division_factors] ]);
+                return ( $gsf_cache{$n} =
+                        [ @{$division_factors}[ 1 .. $#$division_factors ] ] );
             }
             else
             {
-                return ($gsf_cache{$n} = [ $p, @$division_factors ]);
+                return ( $gsf_cache{$n} = [ $p, @$division_factors ] );
             }
         }
     }
@@ -131,11 +132,8 @@ sub mult_by
     my $n_ref = shift;
     my $m_ref = shift;
 
-    my @n = @{$n_ref->factors()};
-    my @m =
-    eval {
-        @{$m_ref->factors()};
-    };
+    my @n = @{ $n_ref->factors() };
+    my @m = eval { @{ $m_ref->factors() }; };
     if ($@)
     {
         print "Hello\n";
@@ -143,14 +141,14 @@ sub mult_by
 
     my @ret = ();
 
-    while (scalar(@n) && scalar(@m))
+    while ( scalar(@n) && scalar(@m) )
     {
-        if ($n[0] == $m[0])
+        if ( $n[0] == $m[0] )
         {
             shift(@n);
             shift(@m);
         }
-        elsif ($n[0] < $m[0])
+        elsif ( $n[0] < $m[0] )
         {
             push @ret, shift(@n);
         }
@@ -161,7 +159,7 @@ sub mult_by
     }
     push @ret, @n, @m;
 
-    $n_ref->factors(\@ret);
+    $n_ref->factors( \@ret );
 
     # 0 for success
     return 0;
@@ -192,7 +190,7 @@ A predicate that returns whether the factors represent a square number.
 sub is_square
 {
     my $self = shift;
-    return (scalar(@{$self->factors()}) == 0);
+    return ( scalar( @{ $self->factors() } ) == 0 );
 }
 
 =head2 $facts->exists($myfactor)
@@ -203,9 +201,9 @@ Checks whether C<$myfactor> exists in C<$facts>.
 
 sub exists
 {
-    my ($self, $factor) = @_;
+    my ( $self, $factor ) = @_;
 
-    return defined(List::Util::first { $_ == $factor } @{$self->factors()});
+    return defined( List::Util::first { $_ == $factor } @{ $self->factors() } );
 }
 
 =head2 my $last_factor = $factors->last()
@@ -233,7 +231,7 @@ sub product
 {
     my $self = shift;
 
-    return (List::Util::reduce { $a * $b } @{$self->factors()});
+    return ( List::Util::reduce { $a * $b } @{ $self->factors() } );
 }
 
 =head2 $facts->first()

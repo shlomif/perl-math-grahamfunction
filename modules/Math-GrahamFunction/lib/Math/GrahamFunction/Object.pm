@@ -23,7 +23,7 @@ A constructor. Calls C<_initialize> with the arguments it receives.
 sub new
 {
     my $class = shift;
-    my $self = {};
+    my $self  = {};
     bless $self, $class;
     $self->_initialize(@_);
     return $self;
