@@ -18,7 +18,7 @@ my $PROJECT = "Math-GrahamFunction";
 my @cmd     = (
     "git", "tag", "-m",
     "Tagging the $PROJECT release as $version",
-    "releases/modules/$PROJECT/0.02003",
+    "releases/modules/$PROJECT/$version",
 );
 
 print join( " ", map { /\s/ ? qq{"$_"} : $_ } @cmd ), "\n";
