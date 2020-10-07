@@ -14,7 +14,7 @@ This is a module for Math::GrahamFunction's internal use only.
 
 =cut
 
-use base qw(Math::GrahamFunction::SqFacts);
+use parent qw(Math::GrahamFunction::SqFacts);
 
 use List::Util ();
 __PACKAGE__->mk_accessors(qw(result compose));
@@ -126,4 +126,3 @@ sub _get_ret
 }
 
 1;
-

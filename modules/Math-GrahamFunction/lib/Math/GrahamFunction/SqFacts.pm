@@ -251,18 +251,6 @@ sub first
 
 Shlomi Fish, C<< <shlomif at cpan.org> >>
 
-=head1 ACKNOWLEDGEMENTS
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2007 Shlomi Fish, all rights reserved.
-
-This program is released under the following license: MIT X11.
-
-B<Note:> the module meta-data says this module is released under the BSD
-license. However, MIT X11 is the more accurate license, and "bsd" is
-the closest option for the CPAN meta-data.
-
 =cut
 
 1;

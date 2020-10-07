@@ -43,7 +43,7 @@ sub _initialize
 
 =head1 SYNOPSIS
 
-    use Math::GrahamFunction;
+    use Math::GrahamFunction ();
 
     my $calc = Math::GrahamFunction->new({ 'n' => 500 });
 
@@ -462,40 +462,6 @@ L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Math::GrahamFunction>.
 I will be notified, and then you'll automatically be notified of progress on
 your bug as I make changes.
 
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc Math::GrahamFunction
-
-You can also look for information at:
-
-=over 4
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Math::GrahamFunction>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Math::GrahamFunction>
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Math::GrahamFunction>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Math::GrahamFunction>
-
-=back
-
-=head1 SOURCE AVAILABILITY
-
-The latest source for this module is available from its subversion repository:
-
-L<http://svn.berlios.de/svnroot/repos/web-cpan/Math-GrahamFunction/trunk>
-
 =head1 ACKNOWLEDGEMENTS
 
 Mark Jason Dominus ( L<http://perl.plover.com/> ) for the original Graham
@@ -504,16 +470,6 @@ Function Quiz-of-the-Week.
 imacat (L<http://www.imacat.idv.tw/>) and David Golden for helping me
 debug a CPAN smoking failure with installing this module on imacat's
 computer.
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2007 Shlomi Fish, all rights reserved.
-
-This program is released under the following license: MIT X11.
-
-B<Note:> the module meta-data says this module is released under the BSD
-license. However, MIT X11 is the more accurate license, and "bsd" is
-the closest option for the CPAN meta-data.
 
 =cut
 
